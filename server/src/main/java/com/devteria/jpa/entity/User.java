@@ -22,6 +22,9 @@ public class User {
     String password;
     String firstName;
     String lastName;
+    @Column(nullable = false, unique = true)
+    String account;
+    String department;
     LocalDate dob;
     @ManyToMany
     Set<Role> roles;

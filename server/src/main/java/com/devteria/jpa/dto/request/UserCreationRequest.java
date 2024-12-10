@@ -19,6 +19,9 @@ public class UserCreationRequest {
     String password;
     String firstName;
     String lastName;
+    String account;
+    String department;
     @DobConstraint(min = 18, message = "INVALID_DOB")
     LocalDate dob;
+
 }

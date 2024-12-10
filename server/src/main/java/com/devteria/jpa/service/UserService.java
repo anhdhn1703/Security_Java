@@ -39,6 +39,10 @@ public class UserService {
         User user = userMapper.toUser(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
+        if (user.getAccount() == null || user.getAccount().isEmpty()) {
+            user.setAccount(request.getUsername());
+        }
+
         HashSet<Role> roles = new HashSet<>();
         roleRepository.findById(PredefinedRole.USER_ROLE).ifPresent(roles::add);
 

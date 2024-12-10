@@ -19,6 +19,8 @@ public class UserResponse {
     String username;
     String firstName;
     String lastName;
+    String account;
+    String department;
     LocalDate dob;
     Set<RoleResponse> roles;
 }
