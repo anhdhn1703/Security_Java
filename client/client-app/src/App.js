@@ -1,18 +1,30 @@
 import {BrowserRouter, Route, Router, Routes} from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import TarotCard from "./pages/TarotCard";
+import Auth from "./pages/Auth";
+import ProtectedRoute from "./util/ProtectedRoute";
+import {useState} from "react";
 
 function App() {
-  return (
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/boi-bai-tarot" element={<TarotCard />} />
-        </Routes>
-      </BrowserRouter>
-  );
+    const [isAuthenticated, setIsAuthenticated] = useState(
+        !!localStorage.getItem("authToken")
+    );
+    return (
+        <BrowserRouter>
+
+            <Routes>
+                <Route path="/login" element={<Auth onLogin={() => setIsAuthenticated(true)}/>}/>
+                <Route
+                    path="/"
+                    element={
+                        <ProtectedRoute>
+                            {/*<Header/>*/}
+                            <Home/>
+                        </ProtectedRoute>
+                    }/>
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App
